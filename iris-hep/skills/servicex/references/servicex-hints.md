@@ -80,6 +80,7 @@ all_jet_pts_delivered = deliver(
 - The query can be re-used.
 - Use `dataset.Rucio` for a `rucio` dataset, use `dataset.FileList` for a list of web accessible datasets (via `https` or `xrootd://`)
 - Only call deliver once - make sure all the data you want is in the query, even if multiple samples - just add more to the `Sample` array.
+- If cache bypass is requested or needed for stress/repeat testing, set `ignore_local_cache=True` (argument to the `deliver` function).
 
 There are two ways to access the output of the `deliver` function.
 
@@ -163,3 +164,8 @@ Note:
 If you encounter an error after running, there are two types. The first give you type errors, and those you can solve just by reading the error message carefully and perhaps not doing whatever the code complained about. You might have to look carefully for this message - for example "Method xxx not found on object."
 
 The second type of error there isn't much you can do to get more information, however. You'll find an error that looks like "Transform "xxx" completed with failures." And something in `stdout` about clicking on `HERE` to get more information. Sadly, only the requester can do that. If that happens just reply with "HELP USER" and that will be a signal. Note that you might get an error as mentioned above and this - in which case try to solve the error before getting the user involved. A common case here is you request some data that should be in the datafiles, but is not.
+
+## Dependency caveat
+
+- Ensure `func_adl_servicex_xaodr25` is installed and importable in the active environment.
+- In standalone scripts using inline metadata, include `jinja2` explicitly if imports/runtime require it.

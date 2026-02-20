@@ -31,13 +31,16 @@ Provide concise, correct func_adl query patterns for ServiceX on ATLAS xAOD, wit
 - Use a single final `Select` that returns a dictionary of outputs.
 - Do not use `awkward` functions inside ServiceX queries.
 - Use `dataset.Rucio` for rucio DIDs and `dataset.FileList` for URL lists.
-- Always set `NFiles=1` in `deliver` by default.
+- Always set `NFiles=1` by default.
+- For fetches where cache bypass matters, use `ignore_local_cache=True` in `deliver`.
 - If a transform fails and logs are required, respond with `HELP USER`.
 - Ensure `func_adl_servicex_xaodr25` is listed as a dependency in the active project and installed in the current virtual environment before running or generating code that uses it.
+- In standalone-script metadata, declare `jinja2` explicitly if the environment requires it for `func_adl_servicex_xaodr25` usage.
 
 ## References
 
-- Load `references/servicex-hints.md` for overall ServiceX query patterns, best practices, and error handling, and template code.
+- Load `references/servicex-hints.md` for overall ServiceX query patterns, synchronous delivery patterns, best practices, and error handling.
+- Load `references/servicex-async-hints.md` only when async behavior is explicitly requested (`deliver_async`, async timeout handling, or version-compat async behavior).
 - Load only the relevant xAOD data model topic file(s) to keep context small. Naming convention: `references/datamodel-xaod-*.md`.
 - xAOD topics:
   - `references/datamodel-xaod-units.md` (standard ATLAS units (energy, etc))
